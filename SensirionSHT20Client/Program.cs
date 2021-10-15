@@ -1,5 +1,5 @@
 ﻿//---------------------------------------------------------------------------------
-// Copyright (c) September 2021, devMobile Software
+// Copyright (c) October 2021, devMobile Software
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,8 @@
 namespace devMobile.IoT.NetCore.Sensirion
 {
 	using System;
-	using System.Threading;
 	using System.Device.I2c;
+	using System.Threading;
 
 	class Program
 	{
@@ -33,12 +33,22 @@ namespace devMobile.IoT.NetCore.Sensirion
 
 			using (Sht20 sht20 = new Sht20(i2cDevice))
 			{
+				sht20.Reset();
+
 				while (true)
 				{
 					double temperature = sht20.Temperature();
 					double humidity = sht20.Humidity();
 
-					Console.WriteLine($"{DateTime.Now:HH:mm:ss} Temperature:{temperature:F1}°C Humidity:{humidity:F0}%");
+#if HEATER_ON_OFF
+					sht20.HeaterOn();
+					Console.WriteLine($"{DateTime.Now:HH:mm:ss} HeaterOn:{sht20.IsHeaterOn()}");
+#endif
+					Console.WriteLine($"{DateTime.Now:HH:mm:ss} Temperature:{temperature:F1}°C Humidity:{humidity:F0}% HeaterOn:{sht20.IsHeaterOn()}");
+#if HEATER_ON_OFF
+					sht20.HeaterOff();
+					Console.WriteLine($"{DateTime.Now:HH:mm:ss} HeaterOn:{sht20.IsHeaterOn()}");
+#endif
 
 					Thread.Sleep(1000);
 				}
