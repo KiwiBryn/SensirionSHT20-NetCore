@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>devMobile.IoT.NetCore.Sensirion</RootNamespace>
+    <Version>1.0.1</Version>
+    <Authors>SensirionSHT20</Authors>
+    <Company>devMobile Software</Company>
+    <Product>Sensirion SHT20 library</Product>
+    <Copyright>devMobile Software, Apache License, Version 2.0</Copyright>
+    <PackageProjectUrl>https://blog.devmobile.co.nz</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/KiwiBryn/SensirionSHT20-NetCore</RepositoryUrl>
+    <PackageTags>SHT20,Temperature,Humidity</PackageTags>
+    <Description>Library forSensirion SHT20 sensors shich supports reading temperature+humidity, reset, and heater on/off</Description>
   </PropertyGroup>
 
   <ItemGroup>
