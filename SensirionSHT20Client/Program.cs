@@ -38,7 +38,7 @@ namespace devMobile.IoT.NetCore.Sensirion
 					double temperature = sht20.Temperature();
 					double humidity = sht20.Humidity();
 
-					Console.WriteLine($"{DateTime.Now:HH:mm:SS} Temperature:{temperature:F1}°C Humidity:{humidity:F0}%");
+					Console.WriteLine($"{DateTime.Now:HH:mm:ss} Temperature:{temperature:F1}°C Humidity:{humidity:F0}%");
 
 					Thread.Sleep(1000);
 				}
