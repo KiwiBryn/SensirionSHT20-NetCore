@@ -30,30 +30,30 @@ namespace devMobile.IoT.NetCore.Sensirion
 			I2cConnectionSettings i2cConnectionSettings = new(busId, Sht20.DefaultI2cAddress);
 
 			using I2cDevice i2cDevice = I2cDevice.Create(i2cConnectionSettings);
-
-			using (Sht20 sht20 = new Sht20(i2cDevice))
 			{
-				sht20.Reset();
-
-				while (true)
+				using (Sht20 sht20 = new Sht20(i2cDevice))
 				{
-					double temperature = sht20.Temperature();
-					double humidity = sht20.Humidity();
+					sht20.Reset();
+
+					while (true)
+					{
+						double temperature = sht20.Temperature();
+						double humidity = sht20.Humidity();
 
 #if HEATER_ON_OFF
 					sht20.HeaterOn();
 					Console.WriteLine($"{DateTime.Now:HH:mm:ss} HeaterOn:{sht20.IsHeaterOn()}");
 #endif
-					Console.WriteLine($"{DateTime.Now:HH:mm:ss} Temperature:{temperature:F1}°C Humidity:{humidity:F0}% HeaterOn:{sht20.IsHeaterOn()}");
+						Console.WriteLine($"{DateTime.Now:HH:mm:ss} Temperature:{temperature:F1}°C Humidity:{humidity:F0}% HeaterOn:{sht20.IsHeaterOn()}");
 #if HEATER_ON_OFF
 					sht20.HeaterOff();
 					Console.WriteLine($"{DateTime.Now:HH:mm:ss} HeaterOn:{sht20.IsHeaterOn()}");
 #endif
 
-					Thread.Sleep(1000);
+						Thread.Sleep(1000);
+					}
 				}
 			}
 		}
 	}
 }
-
